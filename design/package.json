@@ -1,0 +1,41 @@
+{
+  "name": "ui.tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "playwright-core": "^1.50.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.4.5",
+    "@babel/preset-env": "^7.20.2",
+    "@playwright/test": "^1.50.0",
+    "autoprefixer": "^10.4.8",
+    "babel-jest": "^26.6.3",
+    "jest-junit": "^12.0.0"
+  },
+  "scripts": {
+    "e2e": "ENVIRONMENT=LOCAL npx playwright test",
+    "update-snapshots": "docker run --rm --network host -a stdout -a stderr -v $(pwd):/work/ -w /work -it mcr.microsoft.com/playwright:v1.27.1-focal /bin/bash /work/update-snapshots.sh"
+  },
+  "jest": {
+    "transform": {
+      "\\.js$": "babel-jest"
+    },
+    "reporters": [
+      "default"
+    ],
+    "testPathIgnorePatterns": [
+      "target"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/src/**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
+  },
+  "jest-junit": {
+    "outputDirectory": "./target/test-reports"
+  },
+  "author": "",
+  "license": "ISC"
+}
